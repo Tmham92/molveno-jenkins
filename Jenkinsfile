@@ -5,7 +5,7 @@ pipeline {
             steps {
 		checkout scm
 		sh 'mvn package -D maven.test.skip=true -f pom.xml'
-		sh 'docker build image -f molveno-app-jenkins'
+		sh 'docker build -f molveno-app-jenkins'
             }
         }
     }
