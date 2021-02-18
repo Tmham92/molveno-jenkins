@@ -1,0 +1,33 @@
+body {
+    background-color: black;
+    height: 100vh;
+}
+
+.panel {
+    width: 50%;
+    border: 2px solid deepskyblue;
+    border-radius: 10px;
+}
+
+.container-fluid {
+    height: calc(100% - 75px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-body {
+    background-color: lightblue;
+    padding: 15px 30px 15px 30px;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.number-control {
+    width: 100px;
+}
+
+
+#reserve-button {
+    width: 50%;
+}

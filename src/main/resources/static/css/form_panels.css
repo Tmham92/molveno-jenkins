@@ -1,0 +1,65 @@
+.panel-heading {
+    background-color: #0084C4;
+    padding: 0px 5px 0px 5px;
+    border: 2px solid #0084C4;
+    border-radius: 5px 5px 0px 0px;
+    box-shadow: 5px 5px 5px lightgray;
+}
+
+.panel-body {
+    background-color: #68B6DA;
+    padding: 5px 5px 0px 5px;
+    border: 2px solid #0084C4;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: 5px 5px 5px lightgray;
+}
+
+.panel-noheader {
+    background-color: #68B6DA;
+    padding: 5px 5px 5px 5px;
+    border: 2px solid deepskyblue;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 5px 5px 5px lightgray;
+}
+
+.main-panel {
+    padding-top: 25px;
+}
+
+.modal-header {
+    background-color: #0084C4;
+    border-bottom: 1px solid #0084C4;
+    border-top: 1px solid #0084C4;
+}
+
+.modal-body, .modal-footer {
+    background-color: #68B6DA;
+    border-top: 1px solid #0084C4;
+}
+
+.modal-footer {
+    border-top: 1px solid #68B6DA;
+}
+
+
+.modal-backdrop {
+    z-index: 1020 !important;
+}
+
+.modal-dialog {
+    border: 1px solid #0084C4;
+    width: auto;
+    height: auto;
+}
+
+.error-message {
+    color: red;
+    font-size: 15px;
+    text-align: center;
+}
+
+.modal-content {
+    background-color: #0084C4;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #595959;
+}

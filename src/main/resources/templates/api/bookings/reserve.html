@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}" href="../static/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/bookings/reserve.css}">
+
+    <title th:utext="#{api.booking.reservation_title}"></title>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar">...</div>
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div>
+                    <h4>Your Details</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="font-weight-bold" th:text="#{booking.arrival-date}"></li>
+                                <li>
+                                    <span th:text="${arrivalDate}"></span>
+                                </li>
+                                <li class="font-weight-bold" th:text="#{booking.departure-date}"></li>
+                                <li>
+                                    <span th:text="${departureDate}"></span>
+                                </li>
+                                <li class="font-weight-bold" th:text="#{booking.guests}"></li>
+                                <li>
+                                    <span th:text="${roomsFilter.guests}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="font-weight-bold" th:text="#{booking.main-booker}"></li>
+                                <li>
+                                    <span th:text="${user.firstName}"></span>
+                                    <span th:text="${user.lastName}"></span>
+
+                                </li>
+                                <li class="font-weight-bold" th:text="#{api.users.dob}"></li>
+                                <li>
+                                    <span th:text="${birthDate}"></span>
+                                </li>
+                                <li class="font-weight-bold" th:text="#{api.users.email}"></li>
+                                <li>
+                                    <span th:text="${user.email}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <form th:object="${guests}" th:action="@{/api/bookings/submit}" method="post">
+                    <h4>Guest details</h4>
+                        <th:block th:each="guest, iStat : ${#numbers.sequence(1, roomsFilter.guests - 1)}">
+                            <label>
+                                <span th:text="#{api.reserve.name_of_guest}"></span>
+                                <span th:text="${guest}"></span>
+                            </label>
+                            <input class="form-control" type="text" th:field="*{notBookingGuestList[__${iStat.index}__].name}">
+                        </th:block>
+                        <button type="submit" class="btn btn-primary mt-3">Book</button>
+                </form>
+                <div>
+<!--                    <h4>Room(s)</h4>-->
+<!--                    <p>TO-DO</p>-->
+<!--                    <div class="roomAmounts">-->
+<!--                        <form method="post" th:action="@{/api/bookings/submit}" th:object="${reservation}" id="reservationForm">-->
+<!--                            <div class="form-group">-->
+<!--                                <select id="multiple-rooms" class="form-control" th:field="*{selectedRooms}" multiple>-->
+<!--                                    <option th:each="room, iStat : ${rooms}" th:value="${room.id}">-->
+<!--                                        <span th:text="${room.type.displayValue}"></span>, floor:-->
+<!--                                        <span th:text="${room.floor}"></span>, capacity:-->
+<!--                                        <span th:text="${room.maxAdults + room.maxChildren}"></span>,-->
+<!--                                        <span th:if="${room.smokingAllowed}" th:text="#{filters.room.smokingAllowed}"></span>,-->
+<!--                                        <span th:if="${room.forDisabled}" th:text="#{filters.room.forDisabled}"></span>-->
+<!--                                    </option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <button type="submit" name="addRoom">Add Room</button>-->
+<!--                            <div class="form-group" th:each="room, iStat : ${reservation.selectedRooms}">-->
+<!--                                <input class="d-inline-block number-control mr-3" type="number" min="1" value="1"/>-->
+<!--                                <p class="d-inline-block font-weight-bold">-->
+<!--                                    <span th:text="${room.type.displayValue}"></span>, floor:-->
+<!--                                    <span th:text="${room.floor}"></span>-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <input type="submit"/>-->
+<!--                        </form>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

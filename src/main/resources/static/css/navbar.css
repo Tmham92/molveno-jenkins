@@ -1,0 +1,37 @@
+.dropdown {
+    min-width: 3rem;
+}
+
+.custom-navbar {
+    padding-bottom: 20px !important;
+}
+
+.nav-item-icon {
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: 1.25rem;
+}
+
+.navbar-brand {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+}
+
+nav {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.logo-text {
+    color: #0070b1;
+    margin-left: 10px;
+    font-family: "Brush Script MT";
+    font-size: 30px;
+}
+
+.hide-this {
+    display: none !important;
+}

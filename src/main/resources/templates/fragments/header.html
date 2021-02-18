@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+    <div class="row">
+        <div class="jumbotron text-center" th:fragment="header">
+
+            <h1 th:text="#{header.welcome}"></h1>
+            <p th:text="#{header.responsive}"></p>
+        </div>
+        <div>
+            <div th:replace="fragments/navbar :: navbar">...</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}" >
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/form_panels.css}" href="../static/css/form_panels.css">
+    <link rel="stylesheet" th:href="@{/css/login.css}" href="../static/css/login.css">
+    <title th:utext="#{app.title}"></title>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar">...</div>
+<div class="container-fluid">
+
+    <section class="hero-container">
+        <div class="card" style="border: none">
+            <div class="card-body" >
+                <div class="panel-heading" style="color: #005693" th:text="#{common.login}">Log in</div>
+                <div class="panel-body">
+                    <form th:action="@{/log_in}" method="post">
+                        <div class="form-group"><label th:text="#{api.users.email}">  </label><input th:value="${emailExists}" class="float-right form-control" type="text" name="username"/></div>
+                        <div class="form-group"><label th:text="#{api.users.password}">  </label><input class="float-right form-control" type="password" name="password"/></p></div>
+                        <div class="text-center" style="height: 70px;"><input class="btn btn-outline-primary" type="submit" th:value="#{login.signin}" style="margin-top: 5px;"/></div>
+                    </form>
+                </div>
+                <div class="float-right"><label id="errorField"></label></div>
+                <div style="height: 30px"></div>
+                <div class="panel-noheader" style="margin-top: 2px; height:45px"><span th:text="#{login.account}"></span><a href="/api/users/register" class="float-right btn btn-outline-secondary btn-sm" th:text="#{login.register}"></a>
+                </div>
+            </div>
+            <!-- Link trigger modal -->
+            <a data-toggle="modal" data-target="#forgotPasswordModal" th:text="#{login.passwordrecovery}"></a>
+        </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel" th:text="#{login.forgotpass}"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="#" class=RecoverPasswordForm id=RecoverPasswordForm th:action="@{/sendMail}" th:object="${recoverPasswordForm}" method="post" style="background-color: #68B6DA">
+                    <div class="modal-body">
+
+                            <div><label th:text="#{api.users.email}"></label><button type="button" class="btn btn-secondary float-right" data-bs-toggle="tooltip" data-bs-placement="top" th:title="#{api.users.resetinfo}">
+                                ?
+                            </button></div><div>
+                            <input class="form-control float-right" type="text" autocomplete="off" th:field="*{email}" id="email" required pattern="[A-Za-z0-9\u3000\u3400-\u4DBF\u4E00-\u9FFF._%+-]+@[a-z0-9\u3000\u3400-\u4DBF\u4E00-\u9FFF.-]+\.[a-z\u3000\u3400-\u4DBF\u4E00-\u9FFF]{2,}$" th:attr="title=#{api.users.email.criteria}"/></div>
+                            <p class="error-message" th:if="${#fields.hasErrors('email')}" th:text="#{api.users.add.email.error}"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{login.close}"></button>
+                        <button type="submit" class="btn btn-primary" th:text="#{button.submit}"></button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+<script th:inline="javascript">
+    var loginFailed = [[${param.error}]];
+    var message = [[#{login.error}]] + "";
+</script>
+</body>
+</html>

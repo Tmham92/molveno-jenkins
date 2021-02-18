@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" type="text/css" >
+
+<body>
+<nav class="navbar navbar-default" th:fragment="localization-bar">
+    <ul class="list-group list-group horizontal">
+        <li><a class="nav-link" href="?lang=ne" th:text="#{localization-bar.dutch}"></a></li>
+        <li><a class="nav-link" href="?lang=en" th:text="#{localization-bar.english}"></a></li>
+        <li><a class="nav-link" href="?lang=zh" th:text="#{localization-bar.chinese}"></a></li>
+    </ul>
+</nav>
+</body>
+</html>
+
+
+

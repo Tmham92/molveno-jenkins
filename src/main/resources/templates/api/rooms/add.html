@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}" href="../static/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <title th:utext="#{api.rooms.add_new}"></title>
+
+</head>
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 th:text="#{api.rooms.add}"></h1>
+                    </div>
+                    <div class="panel-body">
+                        <form action="#" th:action="@{/api/employee/rooms/add}" th:object="${newRoom}" method="post">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col align-content-center">
+                                        <label class="control-label" for="addRoomNumber" th:text="#{api.rooms.room_number}"><br></label>
+                                    </div>
+                                    <div class="col align-content-center">
+                                        <input class="form-control" id="addRoomNumber" name="roomNumber" type="text" th:field="*{roomNumber}"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col align-content-center">
+                                        <label class="control-label" for="addRoomMaxGuests" th:text="#{api.rooms.max_guests}"><br></label>
+                                    </div>
+                                    <div class="col align-content-center">
+                                        <input class="form-control" id="addRoomMaxGuests" name="maxGuests" type="text" th:field="*{maxNumberOfGuests}"></p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col align-content-center">
+                                        <label class="control-label" for="addRoomSmokingAllowed" th:text="#{api.rooms.smoking_allowed}"></label>
+                                    </div>
+                                    <div class="col align-content-center">
+                                        <input class="form-control" id="addRoomSmokingAllowed" name="isSmokingAllowed" type="checkbox" th:checked="${isSmokingAllowed}"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col align-content-center">
+                                    </div>
+                                        <label class="control-label" for="addRoomIsForDisabled" th:text="#{api.rooms.for_disabled}"></label>
+                                    <div class="col align-content-center">
+                                        <input class="form-control" id="addRoomIsForDisabled" type="checkbox" th:checked="${isForDisabled}"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col align-content-center">
+                                    <label class="control-label" for="isPenthouse" th:text="#{api.rooms.isPenthouse}"></label>
+                                    </div>
+                                    <div class="col align-content-center">
+                                        <input class="form-control" id="isPenthouse" type="checkbox" th:checked="${isPenthouse}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p><input type="submit" value="submit"/> <input type="reset" value="Reset"/></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+    </div>
+    <p><input type="submit" th:value="#{button.submit}"/> <input type="reset" th:value="#{button.reset}"/></p>
+</body>
+</html>

@@ -1,0 +1,42 @@
+body {
+    background-color: black;
+}
+
+.panel-heading {
+    background-color: deepskyblue;
+    padding: 0 5px 0 5px;
+    border: 2px solid deepskyblue;
+    border-radius: 5px 5px 0 0;
+}
+
+.panel-body {
+    background-color: lightblue;
+    padding: 5px;
+    border: 2px solid deepskyblue;
+    border-radius: 0 0 5px 5px;
+}
+
+.number-control {
+    width: 75px;
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.card-subtitle {
+    margin-top: -10px;
+}
+
+.call-to-action-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.form-group > .slider.slider-horizontal {
+    width: 150px;
+}
+
+

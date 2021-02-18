@@ -1,0 +1,74 @@
+body {
+    /*background-image: url("../images/main.jpg");*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    background-color: black;
+    height: 100vh;
+}
+
+.container-fluid {
+    height: calc(100% - 72px);
+}
+
+.hide-this {
+    display: none !important;
+}
+
+.hero-container, .title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-container {
+    flex-direction: column;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+}
+
+.page-title {
+    font-family: "Brush Script MT";
+    font-size: 75px !important;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.hero {
+    margin-left: 50px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 3px 3px #888888;
+}
+
+.card-img-top {
+    background-color:white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.number-control {
+    width: 75px;
+}
+
+.horizontal-rule {
+    background-color: white;
+    height: 5px;
+    width: 100px;
+}
+
+.card-body {
+    padding-top: 0;
+}

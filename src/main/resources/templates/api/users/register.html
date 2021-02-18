@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}" href="../static/css/bootstrap/bootstrap.css">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="https://kit.fontawesome.com/344a5abaee.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/form_panels.css}" href="../static/css/form_panels.css">
+    <title th:utext="#{api.users.add_new}"></title>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar">...</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2 hidden-md">
+        </div>
+        <div class="col-sm-8 main-panel">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 th:text="#{api.users.add}"></h1>
+                </div>
+                <div class="panel-body">
+                    <form action="#" class=addUserForm id=addUserForm th:action="@{/api/users/register}" th:object="${addGuestForm}" method="post">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.part_of_company}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3" >
+                                    <input type="checkbox" th:checked="${enterpriseDetails.enterpriseName} != null" class="form-control form-control-sm" data-toggle="modal" data-target="#enterpriseModal"></p>
+                                </div>
+                            </div>
+                            <div class="row" th:if="${enterpriseDetails.enterpriseName} != null" >
+                                <div class="col-sm-3">
+                                    <label class="control-label" th:text="#{api.users.enterpriseName}"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p th:text="${enterpriseDetails.enterpriseName}"></p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="control-label" th:text="#{api.users.enterpriseCoC}"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p th:text="${enterpriseDetails.enterpriseCoC}"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.fname}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" id=firstName type="text" autocomplete="off" th:value="*{firstName}" th:field="*{firstName}" required pattern="[A-Za-z\u3000\u3400-\u4DBF\u4E00-\u9FFF]{1,25}" th:attr="title=#{api.users.firstname.criteria}"></p>
+                                    <p class="error-message" th:if="${#fields.hasErrors('firstName')}" th:text="#{api.users.add.firstname.error}"></p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.lname}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" id="lastName" autocomplete="off" name="lastName" type="text" th:field="*{lastName}" required pattern="[A-Za-z\u3000\u3400-\u4DBF\u4E00-\u9FFF]{1,40}" th:attr="title=#{api.users.lastname.criteria}"></p>
+                                    <p class="error-message" th:if="${#fields.hasErrors('lastName')}" th:text="#{api.users.add.lastname.error}"></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.email}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" autocomplete="off" th:field="*{email}" id="email" required pattern="[A-Za-z0-9\u3000\u3400-\u4DBF\u4E00-\u9FFF._%+-]+@[a-z0-9\u3000\u3400-\u4DBF\u4E00-\u9FFF.-]+\.[a-z\u3000\u3400-\u4DBF\u4E00-\u9FFF]{2,}$" th:attr="title=#{api.users.email.criteria}"/></p>
+                                    <p class="error-message" th:if="${#fields.hasErrors('email')}" th:text="#{api.users.add.email.error}"></p>
+                                    <div th:if="*{emailExists}">
+                                        <p class="error-message"  th:text="#{api.users.email.already-exists}"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.password}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group" id="show_hide_password">
+                                        <input class="form-control" type="password" autocomplete="off" th:field="*{password}" id="password" required pattern="(?=.*\d)(?=.*[a-z\u3000\u3400-\u4DBF\u4E00-\u9FFF])(?=.*[A-Z\u3000\u3400-\u4DBF\u4E00-\u9FFF]).{8,}" th:attr="title=#{api.users.password.criteria}"/></p>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.dob}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group date" data-provide="datepicker" data-date-format='dd/mm/yyyy' data-date-end-date="0d" data-date-week-start="1">
+                                        <input type="text" class="form-control"  autocomplete="off" th:field="*{dateOfBirth}"/>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.street}" class="control-label" >Street name</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" autocomplete="off" th:field="*{streetName}" id="streetName" required/></p>
+                                    <p class="error-message" th:if="${#fields.hasErrors('streetName')}" th:text="#{api.users.add.streetname.error}"></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.house_number}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" autocomplete="off" th:field="*{houseNumber}" id="houseNumber" required/></p>
+                                    <p class="error-message" th:if="${#fields.hasErrors('houseNumber')}" th:text="#{api.users.add.houseNumber.error}"></p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.zipcode}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" autocomplete="off" th:field="*{zipCode}" id="zipCode" required></p>
+                                    <p class="error-message" th:if="${#fields.hasErrors('zipCode')}" th:text="#{api.users.add.zipcode.error}"></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.city}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" autocomplete="off" th:field="*{city}" id="city" required/></p>
+                                    <p class="error-message" th:if="${#fields.hasErrors('city')}" th:text="#{api.users.add.city.error}"></p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.country}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" autocomplete="off" th:field="*{country}" id="country" required/></p>
+                                    <p class="error-message" th:if="${#fields.hasErrors('country')}" th:text="#{api.users.add.country.error}"></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label th:text="#{api.users.mobile_num}" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" autocomplete="off" th:field="*{mobileNumber}" id="mobileNumber" required pattern="[0-9]{9,12}" th:attr="title=#{api.users.mobile_num.criteria}"/></p>
+                                    <p class="error-message" th:if="${#fields.hasErrors('mobileNumber')}" th:text="#{api.users.add.mobile_num.error}"></p>
+                                </div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-2">
+                                    <p><input class="form-control" type="submit" th:value="#{button.submit}"/></p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <p><input class="form-control" type="reset" th:value="#{button.reset}"/></p>
+                                </div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 hidden-md">
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="enterpriseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Enterprise Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post" id="enterpriseDetails" th:action="@{/api/users/register/enterprise}" th:object="${enterpriseDetails}">
+                    <div class="row">
+                        <div class="col-sm">
+                            <label th:text="#{api.users.enterpriseName}" class="control-label"></label>
+                        </div>
+                        <div class="col-sm">
+                            <input class="form-control" type="text" autocomplete="off" th:field="*{enterpriseName}" id="enterpriseName"/></p>
+                            <p class="form-entry-error" th:if="${#fields.hasErrors('enterpriseName')}" th:errors="*{enterpriseName}"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <label th:text="#{api.users.enterpriseCoC}" class="control-label"></label>
+                        </div>
+                        <div class="col-sm" >
+                            <input class="form-control" type="text"  autocomplete="off"th:field="*{enterpriseCoC}"></p>
+                            <p class="form-entry-error" th:if="${#fields.hasErrors('enterpriseCoC')}" th:errors="*{enterpriseCoC}" ></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="form-control" data-dismiss="modal">Close</button>
+                        <button class="form-control"   id="enterprise-details-submit" type="submit" data-modal="enterpriseModal" th:text="#{button.submit}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    let input = $("#show_hide_password input");
+    let icon = $("#show_hide_password i");
+
+    icon.on('click', function (event) {
+        event.preventDefault();
+
+        if (input.attr("type") === "text") {
+            input.attr('type', 'password');
+            icon.addClass("fa-eye-slash");
+            icon.removeClass("fa-eye");
+
+        } else if (input.attr("type") === "password") {
+            input.attr('type', 'text');
+            icon.removeClass("fa-eye-slash");
+            icon.addClass("fa-eye");
+        }
+    });
+
+    $("[id^=test]").on("change", function(e){
+        if(e.target.checked){
+            $('#myModal').modal();
+        }
+    });
+</script>
+<script type="text/javascript">
+/*    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+
+    today = yyyy+'-'+mm+'-'+dd;
+    document.getElementById("birthdate").setAttribute("max", today);*/
+</script>
+</body>
+</html>

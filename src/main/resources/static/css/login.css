@@ -1,0 +1,26 @@
+body {
+    height:100vh;
+}
+
+
+
+
+.center-panel {
+    alignment: center;
+}
+
+.hero-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.container-fluid {
+    height: calc(100% - 75px);
+}
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

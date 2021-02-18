@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}" href="../static/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title th:utext="#{navbar.title}"></title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+    <a class="navbar-brand" th:href="@{/}">
+        <span>
+            <img th:src="@{/images/molveno_logo_transparant.png}" width="40" height="40" alt="">
+        </span>
+        <span class="logo-text" th:utext="#{app.title}" ></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/api/rooms}" th:text="#{navbar.li.rooms}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('Employee')">
+                <a class="nav-link" th:href="@{/api/users/employee}" th:text="#{navbar.li.users}"></a>
+            </li>
+
+        </ul>
+        <ul class="navbar-nav ml-auto pr-3" >
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <p class="nav-link" >
+                    <span th:text="#{common.welcome}"></span>
+                <span sec:authentication="name"></span></p>
+            </li>
+
+            <li class="nav-item pr-3" sec:authorize="!isAuthenticated()">
+                <a class="nav-link" th:text="#{common.login}" th:href="@{/login}"></a>
+            </li>
+            <li class="nav-item pr-3" sec:authorize="isAuthenticated()">
+                <a class="nav-link" th:text="#{common.logout}"  th:href="@{/log_out}" ></a>
+            </li>
+
+
+            <li class="nav-item">
+                <a th:if="${#locale.getLanguage().toString().equals('zh')}" class="nav-link" href="?lang=en">
+                    <img th:src="@{/images/en_flag_icon.png}" width="30" height="20">
+                </a>
+                <a th:if="${#locale.getLanguage().toString().equals('en')}" class="nav-link" href="?lang=zh">
+                    <img th:src="@{/images/ch_flag_icon.png}" width="30" height="20">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>
